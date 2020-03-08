@@ -43,7 +43,9 @@ namespace DesktopContacts
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.databasePath))
             {
                 conn.CreateTable<Contact>();
-                contacts = conn.Table<Contact>().ToList();
+                contacts = conn.Table<Contact>()
+                               .OrderBy(c => c.Name)
+                               .ToList();
             }
 
             if (contacts != null)
@@ -55,7 +57,9 @@ namespace DesktopContacts
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox searchTextBox = (TextBox)sender;
-            var filteredList = contacts.Where(c => c.Name.ToLower().Contains(searchTextBox.Text.ToLower())).ToList();
+            var filteredList = contacts.Where(c => c.Name.ToLower().Contains(searchTextBox.Text.ToLower()))
+                                       .ToList();
+
             contactsListView.ItemsSource = filteredList;
         }
     }
