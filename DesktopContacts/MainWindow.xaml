@@ -12,6 +12,7 @@
         <TextBox Margin="0,5,0,5"
                  TextChanged="TextBox_TextChanged"/>
         <ListView x:Name="contactsListView"
+                  SelectionChanged="ContactsListView_SelectionChanged"
                   Height="280"
                   Margin="0 5 0 0">
             <ListView.ItemTemplate>
