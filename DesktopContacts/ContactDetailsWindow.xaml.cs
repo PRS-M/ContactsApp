@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DesktopContacts.Classes;
+using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,19 +19,41 @@ namespace DesktopContacts
     /// </summary>
     public partial class ContactDetailsWindow : Window
     {
-        public ContactDetailsWindow()
+        private Contact contact;
+
+        public ContactDetailsWindow(Contact contact)
         {
             InitializeComponent();
+            this.contact = contact;
+            nameTextBox.Text = contact.Name;
+            emailTextBox.Text = contact.Email;
+            phoneTextBox.Text = contact.Phone;
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
+            contact.Name = nameTextBox.Text;
+            contact.Email = emailTextBox.Text;
+            contact.Phone = phoneTextBox.Text;
 
+            using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
+            {
+                connection.CreateTable<Contact>();
+                connection.Update(contact);
+            }
+
+            this.Close();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
+            {
+                connection.CreateTable<Contact>();
+                connection.Delete(contact);
+            }
 
+            this.Close();
         }
     }
 }
