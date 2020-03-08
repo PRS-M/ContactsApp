@@ -55,7 +55,7 @@ namespace DesktopContacts
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox searchTextBox = (TextBox)sender;
-            var filteredList = contacts.Where(c => c.Name.Contains(searchTextBox.Text)).ToList();
+            var filteredList = contacts.Where(c => c.Name.ToLower().Contains(searchTextBox.Text.ToLower())).ToList();
             contactsListView.ItemsSource = filteredList;
         }
     }
