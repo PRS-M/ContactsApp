@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopContacts"
         mc:Ignorable="d"
-        Title="NewContactWindow" Height="300" Width="300">
+        Title="New Contact" Height="300" Width="300">
     <Grid>
         <StackPanel Margin="10">
             <TextBox x:Name="nameTextBox"
